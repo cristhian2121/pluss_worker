@@ -14,14 +14,14 @@ supplies_service = Supplies_Service()
 
 def init_cron():
     print('_°_Init cron_°_')
-    while True:
-        now = datetime.now()
-        time = now.strftime('%H:%M:%S')
-        if time == '04:00:01':
-            print(time)
-            print(config[MPPROMOCIONALES])
-            print('----------')
-            res = supplies_service.get_products(config, MPPROMOCIONALES)
+    # while True:
+    #     now = datetime.now()
+    #     time = now.strftime('%H:%M:%S')
+    #     if time == '04:00:01':
+    #         print(time)
+    #         print(config[MPPROMOCIONALES])
+    #         print('----------')
+    #         res = supplies_service.get_products(config, MPPROMOCIONALES)
 
 
 
