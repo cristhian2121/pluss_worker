@@ -1,5 +1,6 @@
-MPPROMOCIONALES = 'mppromocionales'
 from config import config
+
+MARPICO = 'MARPICO'
 
 def set_product(product_input):
     product_output = { }

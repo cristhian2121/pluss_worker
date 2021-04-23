@@ -1,9 +1,11 @@
-# pluss_worker
-sync products
+# Service to get products from supplies
+This service excecutin one time day
 
------ Up service with ------
-docker build -t pluss_worker .
-docker run --rm -p 5000:5000 -it pluss_worker /bin/bash
+## how it Work
 
------ start sync from URL -----
-url/cris
+For up service in development:
+
+1. Build image with: `docker build --no-cache -t pluss_worket .`
+2. Create container: `docker run --rm -p 5000:5000 -it pluss_worker /bin/bash`
+3. Into container run the command: `flask run --host=0.0.0.0`
+4. Use url localhost:5000/sync/key  where _key_ is private for service

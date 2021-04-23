@@ -8,7 +8,6 @@ from datetime import datetime
 # Services
 from .supplies import Supplies_Service
 from config import config
-from utils.conversor import MPPROMOCIONALES
 
 supplies_service = Supplies_Service()
 
