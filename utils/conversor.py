@@ -2,33 +2,42 @@ from config import config
 
 MARPICO = 'MARPICO'
 
-def set_product(product_input):
+def set_product(params, **kwargs):
+
+    provider = params.get('provider', None)
+    # Get images
+    images = params.get('imagenes', [])[0]
+    image_lg = images["imagen"]["file"] if images else None
+    image = images["imagen"]["file_md"] if images else None
+    image_sm = images["imagen"]["file_sm"] if images else None 
+    size = f'Largo: {params.get("medidas_largo", "-")}, Alto: {params.get("medidas_alto", "-")}, Ancho: {params.get("medidas_ancho", "-")}'
+
     product_output = { }
-    if product_input:
-        image_url = f"{config['MPPROMOCIONALES']['URL_IMAGE']}{product_input.get('codigoProd')}.{config['EXTENSION']['JPG']}"
-        cod_product = product_input.get('codigoProd')
-        image = image_url if cod_product else None 
-        
-        product_output['provier_name'] = config['MPPROMOCIONALES']['NAME']
-        product_output['referency_id'] = product_input.get('referencia') or None
-        product_output['cod_product'] = product_input.get('codigoProd') or None
-        product_output['name'] = product_input.get('descripcion') or None
-        product_output['description'] = product_input.get('descLarga') or None
-        product_output['size'] = product_input.get('medidas') or None
-        product_output['colors'] = product_input.get('color') or None
-        product_output['prints'] = product_input.get('marca') or None
-        product_output['printsArea'] = product_input.get('areaImpresion') or None
-        product_output['packing'] = product_input.get('empaque') or None
-        product_output['discount'] = product_input.get('descuento') or None
-        product_output['cost_after_discount'] = product_input.get('precioDescuento') or None
+    if params:
+        product_output['provier_name'] = config[provider]['NAME']
+        product_output['referency_id'] = params.get('codigo', None)
+        product_output['cod_product'] = params.get('familia', None)
+        product_output['category'] = params.get('familia', None)
+        product_output['name'] = params.get('productName', None)
+        product_output['description'] = params.get('productDescription', None)
+        product_output['colors'] = params.get('color_nombre', None)
+
+        product_output['size'] = params.get('size', None)
+        product_output['prints'] = params.get('tecnica_marca_tecnica', None)
+        product_output['printsArea'] = params.get('area_impresion', None)
+        product_output['packing'] =  params.get('empaque_unds_caja', None)
+
+        product_output['discount'] = float(params.get('descuento', None))
+        product_output['cost'] = float(params.get('precio', None))
+        product_output['cost_after_discount'] = float(params.get('precio', 0)) - float(params.get('descuento', 0))
+        product_output['inventory'] = params.get('inventario', None)
+
         product_output['image'] = image
-        product_output['inventory'] = product_input.get('existencias') or None
-        product_output['cost'] = product_input.get('vlrUnitario') or None
-        product_output['detail'] = product_input.get('descLarga') or None
-        product_output['material'] = product_input.get('material') or None
-        product_output['more_info'] = product_input
+        product_output['image_sm'] = image_sm
+        product_output['image_lg'] = image_lg
 
-        return product_output
+        product_output['detail'] = params.get('descripcion_larga', None)
+        product_output['material'] = params.get('material', None)
+        product_output['more_info'] = params
+        
     return product_output
-
-

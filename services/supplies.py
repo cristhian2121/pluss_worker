@@ -27,26 +27,29 @@ class Supplies_Service:
             uri = providerAux['URI']
             token = providerAux['TOKEN']
             if MARPICO == provider:
-                print('***')
                 self._headers['Authorization'] = f'Api-Key {token}'
+                self._SESS.headers.update(self._headers)
             return uri
         return ''
 
 
     def get_products(self, provider): 
-        print('*****************', provider)       
         url = self.get_url(provider)
-        print(self._headers)
-        print(url)
+        # exist = self._SESS.get(CONECCION_DB)
+        # print('***')
+        # print(exist)
+        # return
         if url:
             response = self._SESS.get(url)
             if response.status_code == 200:
                 response_json = response.json()
+                print(response_json.keys())
                 print('Bien y en json')
-                # insert_products = self.saveProduct(response_json)
+                insert_products = self.saveProduct(response_json["results"], provider)
                 if insert_products: print('Bien')
                 else: print('MAL')
             else:
+                print('else')
                 return dict(message='Error in our services, please try again',
                             status=False,
                             code=500)
@@ -54,44 +57,49 @@ class Supplies_Service:
                         status=False,
                         code=401)
 
-    # def saveProduct(self, data):
-    #     if data and len(data) > 0:
-    #         # try:
-    #         for item in data:
-    #             product = set_product(item)
-    #             print(product['referency_id'])
-    #             print(f"{CONECCION_DB}?referency_id={product['referency_id']}")
-    #             exist = self._SESS.get(
-    #                 CONECCION_DB,
-    #                 params={'referency_id': product['referency_id']})
-    #             product_list = exist.json()
-    #             print('SI') if product_list['results'] else print('NO')
-    #             if not product_list['results']:
-    #                 exist = None
-    #                 try:
-    #                     response = requests.post(CONECCION_DB,
-    #                                              data=json.dumps(product),
-    #                                              headers=self._HEADERS)
-    #                     response.raise_for_status()
-    #                 except HTTPError as http_err:
-    #                     print(f'HTTP error INSERT: {http_err}')
-    #                 except Exception as err:
-    #                     print(f'Other error INSERT: {err}')
-    #             else:
-    #                 product_dic = product_list['results'][0]
-    #                 product_id = product_dic['id']
-    #                 try:
-    #                     response = requests.put(f'{CONECCION_DB}{product_id}/',
-    #                                             data=json.dumps(product),
-    #                                             headers=self._HEADERS)
-    #                     response.raise_for_status()
-    #                 except HTTPError as http_err:
-    #                     print(f'HTTP error UPDATE: {http_err}')
-    #                 except Exception as err:
-    #                     print(f'Other error UPDATE: {err}')
-    #         print('Success!')
-    #         return True
-    #     return False
+    def saveProduct(self, data, provider):
+        if data and len(data) > 0:
+            # try:
+            for item in data:
+                #extract data
+                item.update({ "provider": provider })
+                print('7')
+                materiales = item["materiales"]
+                for product_input in materiales:
+                    if not product_input: continue
+                    product_raw = item.copy()                    
+                    product_raw.pop("materiales")
+                    product_raw.update(product_input)
+                    product = set_product(product_raw)
+
+                    print(product['referency_id'])
+                    exist = requests.get(CONECCION_DB, params={'referency_id': product['referency_id']})
+                    product_list = exist.json()
+                    print('SI') if product_list['results'] else print('NO')
+                    if not product_list['results']:
+                        exist = None
+                        try:
+                            response = requests.post(CONECCION_DB,
+                                                    data=product
+                                                    )
+                            response.raise_for_status()
+                        except HTTPError as http_err:
+                            print(f'HTTP error INSERT: {http_err}')
+                        except Exception as err:
+                            print(f'Other error INSERT: {err}')
+                    else:
+                        product_dic = product_list['results'][0]
+                        product_id = product_dic['id']
+                    try:
+                        response = requests.put(f'{CONECCION_DB}{product_id}/', data=json.dumps(product))
+                        response.raise_for_status()
+                    except HTTPError as http_err:
+                        print(f'HTTP error UPDATE: {http_err}')
+                    except Exception as err:
+                        print(f'Other error UPDATE: {err}')
+            print('Success!')
+            return True
+        return False
 
 
 # json.dumps serializer object json to json string strungFy
