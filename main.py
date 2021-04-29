@@ -1,3 +1,8 @@
+# Import enviroment but  no is necesary, in this momento you need run
+# export FLASK_ENV=development
+from enviroment import env
+from debugger import initialize_flask_server_debugger_if_needed
+
 from flask import Flask, request
 
 # Services
@@ -8,10 +13,10 @@ from services.provider import Provider
 # Utils
 from utils.conversor import MARPICO
 
+# comment to run sever amd latter uncomment for attach with Vscode
+initialize_flask_server_debugger_if_needed()
 app = Flask(__name__)
 supplies_service = Supplies_Service()
-
-mmpromocionales = Provider()
 
 # init_cron()
 
@@ -22,5 +27,9 @@ def test_call(key):
     if key == 'cris' :
         response = supplies_service.get_products(MARPICO)
         if response: return 'ok'
-        return f'Im runming {user_ip}'
+        return f'Im runing {user_ip}'
     return 'You dont have access to this site'
+
+if __name__ == '__main__':
+    print('**********')
+    # app.run(debug=True, host='localhost')
