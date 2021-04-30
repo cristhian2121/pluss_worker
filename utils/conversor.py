@@ -1,3 +1,5 @@
+from flask import json
+
 from config import config
 
 MARPICO = 'MARPICO'
@@ -38,6 +40,6 @@ def set_product(params, **kwargs):
 
         product_output['detail'] = params.get('descripcion_larga', None)
         product_output['material'] = params.get('material', None)
-        product_output['more_info'] = params
+        product_output['more_info'] = json.dumps(params)
         
     return product_output

@@ -4,6 +4,7 @@ from enviroment import env
 from debugger import initialize_flask_server_debugger_if_needed
 
 from flask import Flask, request
+from multiprocessing import Process
 
 # Services
 from services.supplies import Supplies_Service
@@ -15,7 +16,13 @@ from utils.conversor import MARPICO
 
 # comment to run sever amd latter uncomment for attach with Vscode
 initialize_flask_server_debugger_if_needed()
+
+# debbugProcess = Process(target=initialize_flask_server_debugger_if_needed, args=())
+# debbugProcess.start()
+# debbugProcess.join()
+
 app = Flask(__name__)
+print(__name__)
 supplies_service = Supplies_Service()
 
 # init_cron()

@@ -63,7 +63,6 @@ class Supplies_Service:
             for item in data:
                 #extract data
                 item.update({ "provider": provider })
-                print('7')
                 materiales = item["materiales"]
                 for product_input in materiales:
                     if not product_input: continue
@@ -91,7 +90,7 @@ class Supplies_Service:
                         product_dic = product_list['results'][0]
                         product_id = product_dic['id']
                     try:
-                        response = requests.put(f'{CONECCION_DB}{product_id}/', data=json.dumps(product))
+                        response = requests.put(f'{CONECCION_DB}{product_id}/', data=product)
                         response.raise_for_status()
                     except HTTPError as http_err:
                         print(f'HTTP error UPDATE: {http_err}')
