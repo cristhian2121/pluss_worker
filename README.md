@@ -17,6 +17,9 @@ For up service in development:
 3. Install dependencies in project: `pip install -r requirements.txt`
 4. Run server: `fask run --host:0.0.0.0`
 
+**Notes**:
+Those variables are necessaries for start server
+
 export FLASK_DEBUG="True"
 export FLASK_ENV=development
 export FLASK_APP=main.py

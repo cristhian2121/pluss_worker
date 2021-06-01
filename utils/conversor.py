@@ -12,7 +12,7 @@ def set_product(params, **kwargs):
     image_lg = images["imagen"]["file"] if images else None
     image = images["imagen"]["file_md"] if images else None
     image_sm = images["imagen"]["file_sm"] if images else None 
-    size = f'Largo: {params.get("medidas_largo", "-")}, Alto: {params.get("medidas_alto", "-")}, Ancho: {params.get("medidas_ancho", "-")}'
+    size = f'Largo: {params.get("medidas_largo", "Sin datos")}, Alto: {params.get("medidas_alto", "-")}, Ancho: {params.get("medidas_ancho", "Sin datos")}'
 
     product_output = { }
     if params:
@@ -20,11 +20,11 @@ def set_product(params, **kwargs):
         product_output['referency_id'] = params.get('codigo', None)
         product_output['cod_product'] = params.get('familia', None)
         product_output['category'] = params.get('familia', None)
-        product_output['name'] = params.get('productName', None)
-        product_output['description'] = params.get('productDescription', None)
+        product_output['name'] = params.get('descripcion_comercial', None)
+        product_output['description'] = params.get('descripcion_larga', None)
         product_output['colors'] = params.get('color_nombre', None)
 
-        product_output['size'] = params.get('size', None)
+        product_output['size'] = size
         product_output['prints'] = params.get('tecnica_marca_tecnica', None)
         product_output['printsArea'] = params.get('area_impresion', None)
         product_output['packing'] =  params.get('empaque_unds_caja', None)

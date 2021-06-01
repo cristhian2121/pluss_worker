@@ -15,7 +15,7 @@ from services.provider import Provider
 from utils.conversor import MARPICO
 
 # comment to run sever amd latter uncomment for attach with Vscode
-initialize_flask_server_debugger_if_needed()
+# initialize_flask_server_debugger_if_needed()
 
 # debbugProcess = Process(target=initialize_flask_server_debugger_if_needed, args=())
 # debbugProcess.start()
