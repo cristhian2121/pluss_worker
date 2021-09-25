@@ -1,5 +1,3 @@
-# Import enviroment but  no is necesary, in this momento you need run
-# export FLASK_ENV=development
 from enviroment import env
 from debugger import initialize_flask_server_debugger_if_needed
 
@@ -38,5 +36,4 @@ def test_call(key):
     return 'You dont have access to this site'
 
 if __name__ == '__main__':
-    print('**********')
-    # app.run(debug=True, host='localhost')
+    pass

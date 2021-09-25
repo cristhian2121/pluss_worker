@@ -8,10 +8,13 @@ def set_product(params, **kwargs):
 
     provider = params.get('provider', None)
     # Get images
-    images = params.get('imagenes', [])[0]
-    image_lg = images["imagen"]["file"] if images else None
-    image = images["imagen"]["file_md"] if images else None
-    image_sm = images["imagen"]["file_sm"] if images else None 
+    images = params.get('imagenes')
+    image_group_aux = params.get('imagen', None)
+
+    image_group_dt: str = image_group_aux["imagen"]["file"] if image_group_aux else None
+    image_lg = images[0]["imagen"]["file"] if images and images[0] else None
+    image = images[0]["imagen"]["file_md"] if images and images[0] else None
+    image_sm = images[0]["imagen"]["file_sm"] if images and images[0] else None 
     size = f'Largo: {params.get("medidas_largo", "Sin datos")}, Alto: {params.get("medidas_alto", "-")}, Ancho: {params.get("medidas_ancho", "Sin datos")}'
 
     product_output = { }
@@ -37,6 +40,7 @@ def set_product(params, **kwargs):
         product_output['image'] = image
         product_output['image_sm'] = image_sm
         product_output['image_lg'] = image_lg
+        product_output['image_group'] = image_group_dt
 
         product_output['detail'] = params.get('descripcion_larga', None)
         product_output['material'] = params.get('material', None)

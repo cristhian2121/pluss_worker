@@ -15,7 +15,7 @@ For up service in development:
 1. Create enviroment: `viertualenc myenvname`
 2. Activate enviroment: `source /bin/activate`
 3. Install dependencies in project: `pip install -r requirements.txt`
-4. Run server: `fask run --host:0.0.0.0`
+4. Run server: `flask run --host:0.0.0.0`
 
 **Notes**:
 Those variables are necessaries for start server
@@ -36,7 +36,7 @@ export FLASK_APP=main.py
             "host": "localhost"
         }`
 
-after you can commnet the line `initialize_flask_server_debugger_if_needed()` in  main.py after run server and descomment linea all rigth, now debbuger with VsCode
+after you can commnet the line `initialize_flask_server_debugger_if_needed()` in  main.py after run server and discomment the linea and all rigth, now debbuger with VsCode
 
 
 
