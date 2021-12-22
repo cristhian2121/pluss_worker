@@ -12,5 +12,6 @@ config = {
         'NAME': 'MARPICO',
         'TOKEN': 'xWShDTQ4P0TSfvCdW2sIoaedypE1g5ayK8e8bIL8OA95yMJ4g2gc30IaavorW916',
         'URI': 'https://marpicoprod.azurewebsites.net/api/inventarios/materialesAPI',
-    }
+    },
+    "IP_SERVER": "134.122.21.214"
 }
