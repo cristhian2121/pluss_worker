@@ -33,7 +33,6 @@ class Supplies_Service:
 
     def get_products(self, provider): 
         url = self.get_url(provider)
-        print(url)
         if url:
             response = self._SESS.get(url)
             if response.status_code == 200:
