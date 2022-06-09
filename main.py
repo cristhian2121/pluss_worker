@@ -27,8 +27,8 @@ crontab = Crontab(app)
 supplies_service = Supplies_Service()
 
 @crontab.job(
-    minute="10",
-    hour="00"
+    minute="40",
+    hour="05" # middle nigth in Colombia
 )
 def my_scheduled_job():
     """Cron job to update products"""

@@ -83,7 +83,6 @@ class Supplies_Service:
         return False
 
     def updateProduct(self, product_from_db, newProduct):
-        print('PUT')
         product_dic = product_from_db['results'][0]
         product_id = product_dic['id']
         try:
