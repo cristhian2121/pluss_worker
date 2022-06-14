@@ -38,6 +38,14 @@ export FLASK_APP=main.py
 
 after you can commnet the line `initialize_flask_server_debugger_if_needed()` in  main.py after run server and discomment the linea and all rigth, now debbuger with VsCode
 
+* Is importan run the cronJob with:
+ `flask crontab add`
+
+Some utils commands are:
+Remove cron: `flask crontab remove`
+List cron: `flask crontab show`
+[SRC flask-cron](https://pypi.org/project/flask-crontab/)
+
 
 
 
