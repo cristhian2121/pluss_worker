@@ -5,14 +5,14 @@ This service excecutin one time day
 
 For up service in development:
 
-1. Build image with: `docker build --no-cache -t pluss_worket .`
+1. Build image with: `docker build --no-cache -t pluss_worker .`
 2. Create container: `docker run --rm -p 5000:5000 -it pluss_worker /bin/bash`
 3. Into container run the command: `flask run --host=0.0.0.0`
 4. Use url localhost:5000/sync/key  where _key_ is private for service
 
 ### Create and Activate virtual enviroment
 
-1. Create enviroment: `viertualenc myenvname`
+1. Create enviroment: `viertualenv myenvname`
 2. Activate enviroment: `source /bin/activate`
 3. Install dependencies in project: `pip install -r requirements.txt`
 4. Run server: `flask run --host:0.0.0.0`
