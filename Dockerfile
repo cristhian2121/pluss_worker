@@ -1,17 +1,23 @@
-FROM python:3.7.6
-ENV PYTHONUNBUFFERED 1
+FROM python:3.8-alpine
+
 WORKDIR /worker/
-RUN apt-get update
-RUN apt-get install cron -y
+
 COPY requirements.txt .
+
 RUN pip install -r requirements.txt
-# enviroment for refresh automatic
+
+COPY . .
+RUN chmod +x request.sh
+
+# TODO: change it to production configuration
+ENV PYTHONUNBUFFERED 1
 ENV FLASK_ENV development
 ENV FLASK_DEBUG True
 ENV FLASK_APP main.py
+
+# Add cron to run request.sh file
+RUN echo "30 5 * * * bash /worker/request.sh" >> /etc/crontabs/root
+
 EXPOSE 5000
-COPY . .
-# I need to add the cron with: flask crontab add
 CMD ["flask", "run", "--host=0.0.0.0"]
-# CMD [ "uwsgi", "--ini", "main.ini" ]
 
