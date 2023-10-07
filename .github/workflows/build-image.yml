@@ -1,4 +1,4 @@
-name: CI - Kventas
+name: CI for Kventas
 run-name: ${{ github.actor }} is building CI - Kventas
 on:
   push:
