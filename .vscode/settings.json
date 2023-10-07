@@ -1,6 +1,6 @@
 {
-    "python.linting.pylintEnabled": false,
-    "python.linting.enabled": true,
-    "python.formatting.provider": "yapf",
-    "python.linting.mypyEnabled": true
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.autopep8"
+  },
+  "python.formatting.provider": "none"
 }
