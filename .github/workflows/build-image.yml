@@ -1,9 +1,10 @@
 name: CI for Kventas
 run-name: ${{ github.actor }} is building CI - Kventas
 on:
+  pull_request:
+    branches: [master]
   push:
-    branches:
-      - master
+    branches: [master]
 jobs:
   build:
     runs-on: ubuntu-latest
